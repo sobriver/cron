@@ -108,7 +108,7 @@ func (p Parser) Parse(spec string) (Schedule, error) {
 		if offset, err = strconv.Atoi(spec[eq+1 : i]); err != nil {
 			return nil, fmt.Errorf("can't convert offset to integer %s: %v", spec[eq+1:i], err)
 		} else {
-			loc = time.FixedZone("Offset", offset)
+			loc = time.FixedZone(fmt.Sprintf("UTC%+d", offset), offset*3600)
 		}
 
 		spec = strings.TrimSpace(spec[i:])
